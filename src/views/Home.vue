@@ -71,6 +71,29 @@ export default {
         offsetX: this.$refs.img1.offsetLeft,
         offsetY: this.$refs.img1.offsetTop
       };
+      this.moveEle();
+    },
+    moveEle() {
+      let speed = 2; //定义总体速度
+      //随机设置小球的初始位置
+      let ballX = (this.contentP.width - this.moveP.width) * Math.random();
+      let ballY = (this.contentP.height - this.moveP.height) * Math.random();
+      //随机设置小球在x和y方向的速度
+      let theta = 2 * Math.PI * Math.random();
+      let speedX = speed * Math.cos(theta);
+      let speedY = speed * Math.sin(theta);
+      setInterval(() => {
+        ballX += speedX;
+        ballY += speedY;
+        this.$refs.img1.style.left = ballX + "px";
+        this.$refs.img1.style.top = ballY + "px";
+        if (ballX + this.moveP.width >= this.contentP.width || ballX <= 0) {
+          speedX = -speedX;
+        }
+        if (ballY + this.moveP.height >= this.contentP.height || ballY <= 0) {
+          speedY = -speedY;
+        }
+      }, 16.7);
     },
     elementMove() {
       let moveX =
